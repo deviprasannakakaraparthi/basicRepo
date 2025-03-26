@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: "https://github.com/deviprasannakakaraparthi/basicRepo"
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'python -m unittest test_app.py'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Application...'
+            }
+        }
+    }
+}
